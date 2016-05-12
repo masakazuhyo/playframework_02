@@ -1,0 +1,36 @@
+@(myForm : Form[models.MyForm],msg : String)
+
+@import helper._
+
+
+@main("Sample Forms!") {
+	
+  <h1>Hello, Forms!</h1>
+	<p>@Html(msg)</p>
+
+	@helper.form(action = routes.Application.indexPost()) {
+    	
+      @helper.inputText(myForm("name"),'_label -> "あなたの名前")
+     
+
+    	@helper.inputPassword(myForm("password"),'_label -> "パスワード",'_message -> "パスワードを入力してください")パスワードを入力してください
+
+		  @checkbox(myForm("checked"),'_label -> "check")
+
+		  @helper.inputRadioGroup(
+          myForm("os"),
+          helper.options(("1","MS-Windows"),("2"->"Mac OS X"),("3"->"Linux")),
+          '_label -> "radio")
+
+      @helper.select(myForm("country"),
+        helper.options(("1","日本"),("2","アメリカ"),("3","イギリス")),
+        '_label -> "select")
+
+      @helper.textarea(myForm("area"), args = 'rows -> 3, 'cols -> 50)
+      
+      @helper.inputDate(myForm("posted"), '_label -> "date")
+		  
+      @helper.inputText(myForm("inputNum"),'_label -> "inputNum",'type -> "number",'min -> 10,'max -> 100)
+    	<input type="submit" value="送信">
+	}
+}
